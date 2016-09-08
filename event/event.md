@@ -66,15 +66,16 @@
 3、DOM2级
 
 有3个阶段：   
-1、事件捕获阶段
-2、处于目标阶段
-3、事件冒泡阶段
+1、事件捕获阶段   
+2、处于目标阶段   
+3、事件冒泡阶段   
 
-在冒泡和捕获事件流都支持的浏览器（IE9及其以上以及其他主流浏览器）中，有两个机会可以在目标对象上操作事件。
-而IE8及其以下只支持冒泡类型，所以其事件触发只有一个机会。
+在冒泡和捕获事件流都支持的浏览器（IE9及其以上以及其他主流浏览器）中，有两个机会可以在目标对象上操作事件。   
+而IE8及其以下只支持冒泡类型，所以其事件触发只有一个机会。   
 
-addEventListener、 removeEventListener。接收的最后一个参数是表示在什么阶段调用事件处理。   
-true就是在捕获阶段，false就是在冒泡阶段。默认是false。
+addEventListener、 removeEventListener。接收的最后一个参数是表示在什么阶段调用事件处理。      
+true就是在捕获阶段，false就是在冒泡阶段。默认是false。   
+
 ```
 <script type="text/javascript">
     var btn = document.getElementById('inner'),
@@ -94,17 +95,17 @@ true就是在捕获阶段，false就是在冒泡阶段。默认是false。
     body.addEventListener('click', hander, true);
 </script>
 ```
-可以看到，这时的this指向的是body所在的作用域。而**e.target获取的总是事件的实际目标**。   
-用委托函数hander可以方便进行removeEventListener。
-
-这其中：**currentTarget, srcElement, target, this的区别**也清楚了。
-
-currentTarget：是被监听对象目标；
-target：是事件的实际目标，也就是说不一定和currentTarget一样；
-srcElement: 也是实际目标，只是兼容IE8及其以下的浏览器；
-this：被监听的作用域，和currentTarget是一致的；
-
-上面提到，IE8及其以下不支持DOM2事件流，所以事件处理方法是：attachEvent(), detachEvent()。
+可以看到，这时的this指向的是body所在的作用域。而**e.target获取的总是事件的实际目标**。      
+用委托函数hander可以方便进行removeEventListener。   
+   
+这其中：**currentTarget, srcElement, target, this的区别**也清楚了。   
+   
+currentTarget：是被监听对象目标；   
+target：是事件的实际目标，也就是说不一定和currentTarget一样；   
+srcElement: 也是实际目标，只是兼容IE8及其以下的浏览器；   
+this：被监听的作用域，和currentTarget是一致的；   
+   
+上面提到，IE8及其以下不支持DOM2事件流，所以事件处理方法是：attachEvent(), detachEvent()。   
 ```
 <script type="text/javascript">
 body.attachEvent('onclick', function(e){
@@ -114,12 +115,12 @@ body.attachEvent('onclick', function(e){
 });
 </script>
 ```
-这里面与DOM0级主要**区别就在于事件处理程序的作用域**。可以看到在这种情况下，this指向的是全局window。而DOM0级中指向的是所在元素的作用域。
-
-|方法|preventDefault() | stopPropagation() |
+这里面与DOM0级主要**区别就在于事件处理程序的作用域**。可以看到在这种情况下，this指向的是全局window。而DOM0级中指向的是所在元素的作用域。   
+   
+|方法|描述 | 兼容IE |
 |-----|-------|---------|
-|描述|阻止默认行为|取消进一步的事件捕获或冒泡行为|
-|兼容IE| returnValue = false | cancelBubble = false |
+|preventDefault()|阻止默认行为|returnValue = false|
+|stopPropagation()| 取消进一步的事件捕获或冒泡行为 | cancelBubble = false |
 
 --------------
 4、DOM3级
