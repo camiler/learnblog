@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>移动端事件Test</title>
+    <style type="text/css">
+    header{
+        height: 100px;
+        width: 100%;
+        background-color: blue;
+        color: #fff;
+    }
+    article{
+        height: 600px;
+        width: 100%;
+        background-color: #ddd;
+        text-align: center;
+        display: flex;
+
+        -webkit-align-items: center;
+        justify-content: center;
+    }
+
+    </style>
+</head>
+<body>
+    <header id="text"></header>
+
+    <article id="main">
+        <img src="http://img12.360buyimg.com/wympay/jfs/t2773/75/3583245793/19793/3019ffa1/57906681Ne02a9c30.png" width="50%" id="img">
+    </article>
+    <script type="text/javascript">
+    (function(){
+        /* 检测设备查看模式 */
+        window.onload = function(){
+            alert('当前方向：' + window.orientation);
+
+            window.addEventListener('orientationchange', function(e){
+                alert('转动方向：' + window.orientation);
+            });
+
+            var img = document.getElementById('img');
+            img.addEventListener('click', handleTouchEvent, false);
+            img.addEventListener('touchstart', handleTouchEvent, false);
+            img.addEventListener('touchmove', handleTouchEvent, false);
+            img.addEventListener('touchend', handleTouchEvent, false);    //上面的顺序是 ： start move end click
+            img.addEventListener('gesturestart', handleTouchEvent, false);  //这三个只有ios端才会检测到, 还不清楚Android端的js如何检测。
+            img.addEventListener('gesturechange', handleTouchEvent, false);
+            img.addEventListener('gestureend', handleTouchEvent, false);
+        }
+
+        function handleTouchEvent(event){
+
+            var text = document.getElementById('text');
+            
+            switch(event.type){
+                case 'touchstart':
+                    text.innerHTML = "touchstart: " + event.touches[0].clientX + "; " + event.touches[0].clientY;
+                    break;
+                case 'touchmove': 
+                    event.preventDefault();
+                    text.innerHTML = "touchmove：" + event.changedTouches[0].clientX + "; " +  event.changedTouches[0].clientY;
+                    break;
+                case 'touchend': 
+                    text.innerHTML = "touchend: " + event.changedTouches[0].clientX + "; " + event.changedTouches[0].clientY + '; touches:' + Array.prototype.slice.call(event.changedTouches).length;
+                    break;
+                case 'click':
+                    setTimeout(function(){
+                        text.innerHTML = "click: " + event.clientX + "; " + event.clientY;
+                    }, 500);
+                    break;
+                case 'gesturestart':
+                    text.innerHTML = "gestureStart: rotation=" + event.rotation + "; scale=" + event.scale;
+                    break;
+                case 'gesturechange': 
+                    text.innerHTML = "gestureChange: rotation=" + event.rotation + "; scale=" + event.scale;
+                    break;
+                case 'gestureend': 
+                    text.innerHTML = "gestureEnd: rotation=" + event.rotation + "; scale=" + event.scale;
+                    break;
+            }
+        }
+
+
+    })();
+</script>
+</body>
+</html>
