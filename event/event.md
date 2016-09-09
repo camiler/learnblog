@@ -124,4 +124,5 @@ body.attachEvent('onclick', function(e){
 
 --------------
 4、DOM3级
-html5新加的，里面包括了很多移动端处理。有时间详细看看。
+html5新加的，里面包括了很多移动端处理。   
+[移动端事件汇总](https://github.com/camiler/learnblog/tree/master/phoneEvent/README.md)
