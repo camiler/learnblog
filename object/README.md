@@ -39,7 +39,7 @@ ES标准中定义了两种属性类型：
 以上，如果在严格模式（"use strict";）中，person.age=25时，就会报错typeError。   
 
 2、访问器属性   
-[[getter]]和[[setter]]，关于这对属性，(之前有一篇文章)[https://github.com/camiler/learnblog/wiki/%5B%5Bget%5D%5D%E3%80%81%5B%5Bput%5D%5D%E4%BB%A5%E5%8F%8Agetter%EF%BC%8Csetter]。  
+[[getter]]和[[setter]]，关于这对属性，[之前有一篇文章](https://github.com/camiler/learnblog/wiki/%5B%5Bget%5D%5D%E3%80%81%5B%5Bput%5D%5D%E4%BB%A5%E5%8F%8Agetter%EF%BC%8Csetter)。  
 
 ### 定义多个属性   
 ```
