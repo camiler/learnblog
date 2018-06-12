@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="index1.js"></script>
+<script>
+    let p = new MyPromise((resolve, reject) => {
+      setTimeout(function(){
+        resolve(100)
+      }, 1000)
+    })
+    p.then((value) => {
+      console.log(value);
+      return 'first then fulfilled';
+    }, (reason) => {
+      console.log(reason);
+      return 'first then rejected';
+    }).then((res) => {
+      console.log(res);
+    })
+</script>
+</body>
+</html>
